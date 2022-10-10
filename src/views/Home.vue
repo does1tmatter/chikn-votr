@@ -141,7 +141,7 @@ onAppEvent(({ type }) => {
         <Button
           :loading="approvalPending"
           :disabled="approvalPending || !isAuthenticated || isAuthenticating"
-          @click="allowanceState.allowance === 0 ? setApprove(1000000) : setApprove(0)"
+          @click="allowanceState.allowance === 0 ? setApprove(1000) : setApprove(0)"
         >
           {{ allowanceState.allowance === 0 ? 'Approve' : 'Revoke' }} ${{ allowanceState.symbol }} spending
         </Button>
