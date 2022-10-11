@@ -10,7 +10,7 @@ const socials = [
   },
   {
     icon: IconDiscord,
-    href: 'https://discord.gg/9F29NTGY'
+    href: 'https://discord.gg/CvWbwD6Ndh'
   },
   {
     icon: IconMedium,
