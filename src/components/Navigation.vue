@@ -6,11 +6,11 @@ const { isAuthenticated, isAppNetwork, isAuthenticating, login, logout, wallet, 
 </script>
 
 <template>
-  <div class="sticky top-0 z-10 h-16 px-6 tracking-wide shadow-sm backdrop-blur bg-white/5">
+  <div class="sticky top-0 z-10 h-16 px-6 tracking-wide shadow-sm bg-white/5">
     <div class="flex items-center h-full">
       <div class="items-start flex-1">
         <RouterLink to="/" class="inline-flex text-white transition hover:text-white/70 active:text-white font-shadows text-3xl">
-          Chikn
+          CBP
         </RouterLink>
       </div>
       <div class="flex items-center justify-end flex-1 gap-4">
