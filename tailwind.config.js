@@ -6,7 +6,7 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        shadows: 'Celaraz Extrabold'
+        shadows: 'Celaraz Bold'
       },
       colors: {
         red: {
