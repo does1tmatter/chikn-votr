@@ -9,7 +9,7 @@ const { isAuthenticated, isAppNetwork, isAuthenticating, login, logout, wallet, 
   <div class="sticky top-0 z-10 h-16 px-6 ">
     <div class="flex items-center h-full">
       <div class="items-start flex-1">
-        <RouterLink to="/" class="inline-flex text-white transition hover:text-white/70 active:text-white font-shadows text-3xl">
+        <RouterLink to="/" class="inline-flex text-black transition hover:text-white/70 active:text-black font-shadows text-3xl">
           CBP
         </RouterLink>
       </div>
