@@ -44,6 +44,8 @@ export default (address) => {
     eggBurntTotalWei,
     allVotesTotalBase,
     totalVotesFromVoterAddress,
-    votingTimeLeftBlockTimestampHours
+    votingTimeLeftBlockTimestampHours,
+    addressTotalVotesForIDNumber
+    
   }
 }
