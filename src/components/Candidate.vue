@@ -1,23 +1,22 @@
 <script setup>
 import { toRefs, computed, ref } from 'vue'
 import { useAsyncState, useEventBus, useFetch } from '@vueuse/core'
-import { useVotingContract} from '@/composables'
+import { useVotingContract, useUser } from '@/composables'
 import { notify } from 'notiwind'
 
 const { address } = useUser()
 const { on: onAppEvent, emit: emitAppEvent } = useEventBus('app')
-const { returnTotalVotesForCandidateIDNumber, voteWithEggByCandidateNumber, addressTotalVotesForIDNumber } = useVotingContract(address)
+const { returnTotalVotesForCandidateIDNumber, voteWithEggByCandidateNumber } = useVotingContract(address)
 
 const props = defineProps(['candidate', 'allowance', 'index'])
 const { candidate, allowance, index } = toRefs(props)
 const isImageLoaded = ref(false)
 const emit = defineEmits(['load'])
 
-const { state: allVotesThisID, isLoading, execute } = useAsyncState(() => returnTotalVotesForCandidateIDNumber(candidate.value.id), 0, { immediate: false })
-const { state: userVotesThisID, isLoading, execute } = useAsyncState(() => addressTotalVotesForIDNumber(candidate.value.id), 0, { immediate: false })
+const { state: votes, isLoading, execute } = useAsyncState(() => returnTotalVotesForCandidateIDNumber(candidate.value.id), 0, { immediate: false })
 
 execute().then(() => {
-  emit('load', { token: candidate.allVotesThisID.token, allVotesThisID: allVotesThisID.value })
+  emit('load', { token: candidate.value.token, votes: votes.value })
 })
 
 const { data: backend } = useFetch(`https://api.chikn.farm/api/chikn/details/${candidate.value.token}`).get()
@@ -83,10 +82,10 @@ onAppEvent(({ type, payload }) => {
       <div>
         <span class="text-gold-500 font-shadows">{{ parsedData.name }}</span>
         <div class="mt-1 text-sm">
-          Total Votes: <span class="text-gold-500">{{ allVotesThisID }}</span>
+          Votes: <span class="text-gold-500">{{ votes }}</span>
         </div>
         <div class="text-xs mt-2">
-          Your votes: <span class="text-gold-500">{{ userVotesThisID }}</span>
+          Candidate ID: <span class="text-gold-500">{{ candidate.id }}</span>
         </div>
         <div class="text-xs">
           Token ID: <span class="text-gold-500">{{ candidate.token }}</span>
