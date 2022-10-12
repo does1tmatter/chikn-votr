@@ -6,6 +6,9 @@ import { useVotingContract, useEggContract} from '@/composables'
 const { isAuthenticated, isAppNetwork, isAuthenticating, login, logout, wallet, address, ens, chainName } = useUser()
 const { prizeMoneyTotalWei, eggBurntTotalWei, allVotesTotalBase, totalVotesFromVoterAddress, votingTimeLeftBlockTimestampHours} = useVotingContract()
 const { balanceOf } = useEggContract()
+
+const { state: Mybalance } = useAsyncState(() => balanceOf(address.value), 0)
+
 </script>
 
 <template>
@@ -13,7 +16,7 @@ const { balanceOf } = useEggContract()
     <div class="flex items-center h-full">
       <div class="items-start flex-1">
         <Link to="https://www.chiknisbeautiful.com/" class="inline-flex text-white transition hover:text-white/70 active:text-white font-shadows text-2xl">
-          $EGG Balance: {{balanceOf}}  -  You Voted: {{totalVotesFromVoterAddress}}  -  Total $EGG burnt: {{eggBurntTotalWei}}  -  All votes cast:  {{allVotesTotalBase}}  -  Prize Wallet: {{prizeMoneyTotalWei}} $EGG  - {{votingTimeLeftBlockTimestampHours}} Hours left  
+          $EGG Balance: {{Mybalance}}  -  You Voted: {{totalVotesFromVoterAddress}}  -  Total $EGG burnt: {{eggBurntTotalWei}}  -  All votes cast:  {{allVotesTotalBase}}  -  Prize Wallet: {{prizeMoneyTotalWei}} $EGG  - {{votingTimeLeftBlockTimestampHours}} Hours left  
         </Link>
       </div>
       <div class="flex items-center justify-end flex-1 gap-4">
