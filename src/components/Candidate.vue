@@ -6,13 +6,20 @@ import { notify } from 'notiwind'
 
 const { address } = useUser()
 const { on: onAppEvent, emit: emitAppEvent } = useEventBus('app')
-const { returnTotalVotesForCandidateIDNumber, voteWithEggByCandidateNumber } = useVotingContract(address)
+const {     prizeMoneyTotalWei,
+            eggBurntTotalWei,
+            allVotesTotalBase,
+            totalVotesFromVoterAddress,
+            addressTotalVotesForIDNumber, 
+            returnTotalVotesForCandidateIDNumber, 
+    voteWithEggByCandidateNumber } = useVotingContract(address)
 
 const props = defineProps(['candidate', 'allowance', 'index'])
 const { candidate, allowance, index } = toRefs(props)
 const isImageLoaded = ref(false)
 const emit = defineEmits(['load'])
 
+const { state: votes, isLoading, execute } = useAsyncState(() => returnTotalVotesForCandidateIDNumber(candidate.value.id), 0, { immediate: false })
 const { state: votes, isLoading, execute } = useAsyncState(() => returnTotalVotesForCandidateIDNumber(candidate.value.id), 0, { immediate: false })
 
 execute().then(() => {
