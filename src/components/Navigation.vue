@@ -1,7 +1,6 @@
 <script setup>
 import useUser from '@/composables/useUser'
 import { sliceAddress } from '@/utils'
-import { useVotingContract, useEggContract, useUser } from '@/composables'
 
 const { isAuthenticated, isAppNetwork, isAuthenticating, login, logout, wallet, address, ens, chainName } = useUser()
 </script>
@@ -16,7 +15,7 @@ const { isAuthenticated, isAppNetwork, isAuthenticating, login, logout, wallet, 
       </div>
       <div class="items-start flex-1">
         <RouterLink to="/" class="inline-flex text-white transition hover:text-white/70 active:text-white font-shadows text-2xl">
-          Chikn is Beautiful!
+          CBP
         </RouterLink>
       </div>
       <div class="flex items-center justify-end flex-1 gap-4">
@@ -27,19 +26,13 @@ const { isAuthenticated, isAppNetwork, isAuthenticating, login, logout, wallet, 
           <div class="flex items-center justify-end gap-2 text-xs text-white text-right whitespace-nowrap">
             {{ chainName }}
           </div>
-          <div class="text-sm font-semibold text-white text-right">
-            {{ 'Your Total Votes' totalVotesFromVoterAddress }}
-          </div>
-          <div class="flex items-center justify-end gap-2 text-xs text-white text-right whitespace-nowrap">
-            {{ chainName }}
-          </div>
         </div>
         <Button
           @click="isAuthenticated ? logout() : login()" 
           :disabled="isAuthenticating || !wallet || !isAppNetwork"
           :loading="isAuthenticating"
         >
-          {{ wallet ? isAppNetwork ? isAuthenticated ? 'Logout' : 'Connect Wallet' : 'Wrong Network' : 'Unable to detect Avalanche provider' }}
+          {{ wallet ? isAppNetwork ? isAuthenticated ? 'Logout' : 'Connect Wallet' : 'Wrong Network' : 'Unable to detect Ethereum provider' }}
         </Button>
       </div>
     </div>
