@@ -13,7 +13,7 @@ const { balanceOf } = useEggContract()
     <div class="flex items-center h-full">
       <div class="items-start flex-1">
         <Link to="https://www.chiknisbeautiful.com/" class="inline-flex text-white transition hover:text-white/70 active:text-white font-shadows text-2xl">
-          CBP {{allVotesTotalBase}}
+          CBP {{chainName}}
         </Link>
       </div>
       <div class="flex items-center justify-end flex-1 gap-4">
@@ -22,7 +22,7 @@ const { balanceOf } = useEggContract()
             {{ ens ?? sliceAddress(address) }}
           </div>
           <div class="flex items-center justify-end gap-2 text-xs text-white text-right whitespace-nowrap">
-            {{ chainName }}
+            {{ balanceOf }}
           </div>
         </div>
         <Button
