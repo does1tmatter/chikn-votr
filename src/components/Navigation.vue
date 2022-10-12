@@ -4,6 +4,8 @@ import { sliceAddress } from '@/utils'
 import { useVotingContract, useEggContract} from '@/composables'
 
 const { isAuthenticated, isAppNetwork, isAuthenticating, login, logout, wallet, address, ens, chainName } = useUser()
+const { prizeMoneyTotalWei, eggBurntTotalWei, allVotesTotalBase, totalVotesFromVoterAddress, votingTimeLeftBlockTimestampHours} = useVotingContract()
+const { balanceOf } = useEggContract()
 </script>
 
 <template>
@@ -11,7 +13,7 @@ const { isAuthenticated, isAppNetwork, isAuthenticating, login, logout, wallet, 
     <div class="flex items-center h-full">
       <div class="items-start flex-1">
         <RouterLink to="/" class="inline-flex text-white transition hover:text-white/70 active:text-white font-shadows text-2xl">
-          Your Total Votes {{ totalVotesFromVoterAddress }}
+          Your $EGG balance: {{ balanceOf }} 
         </RouterLink>
       </div>
       <div class="flex items-center justify-end flex-1 gap-4">
