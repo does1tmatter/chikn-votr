@@ -19,7 +19,7 @@ export default (address) => {
   const allVotesTotalBase = async () => await contract.allVotesTotalBase().then(response => String(response))
   const votingTimeLeftBlockTimestampHours = async () => await contract.votingTimeLeftBlockTimestamp().then(response => String(Math.floor(Number(response) / 3600)))
   const totalVotesFromVoterAddress = async (payload) => await contract.totalVotesFromVoterAddress(payload ?? address.value).then(response => String(response))
-  const addressTotalVotesForIDNumber = async (payload, id) => await contract.addressTotalVotesForIDNumber(payload ?? address.value, id).then(response => String(response))
+  const addressTotalVotesForIDNumber = async (address, id) => await contract.addressTotalVotesForIDNumber(address, id).then(response => String(response))
 
   
   userStore.$onAction(({ name, after }) => {
