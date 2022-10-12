@@ -14,7 +14,7 @@ const isImageLoaded = ref(false)
 const emit = defineEmits(['load'])
 
 const { state: votes, isLoading, execute } = useAsyncState(() => returnTotalVotesForCandidateIDNumber(candidate.value.id), 0, { immediate: false })
-const { state: votes, isLoading, execute } = useAsyncState(() => addressTotalVotesForIDNumber(candidate.value.address, candidate.value.id), 0, { immediate: false })
+const { state: Myvotes, isLoading, execute } = useAsyncState(() => addressTotalVotesForIDNumber(candidate.value.address, candidate.value.id), 0, { immediate: false })
 
 execute().then(() => {
   emit('load', { token: candidate.value.token, votes: votes.value })
@@ -83,7 +83,10 @@ onAppEvent(({ type, payload }) => {
       <div>
         <span class="text-gold-500 font-shadows">{{ parsedData.name }}</span>
         <div class="mt-1 text-sm">
-          Votes: <span class="text-gold-500">{{ votes }}</span>
+          Total Votes: <span class="text-gold-500">{{ votes }}</span>
+        </div>
+        <div class="mt-1 text-sm">
+          My Votes: <span class="text-gold-500">{{ Myvotes }}</span>
         </div>
         <div class="text-xs mt-2">
           Candidate ID: <span class="text-gold-500">{{ candidate.id }}</span>
