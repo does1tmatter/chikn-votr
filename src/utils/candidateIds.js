@@ -26,5 +26,5 @@ export default [
   { id: 25, token: 1458, votes: 0 },
   { id: 26, token: 3870, votes: 0 },
   { id: 27, token: 9006, votes: 0 },
-  { id: 28, token: 'Princess Laya', votes: 0 }
+  { id: 28, token: 8415, votes: 0 }
 ]
