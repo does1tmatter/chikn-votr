@@ -72,6 +72,7 @@ onAppEvent(({ type, payload }) => {
         <img
           :src="parsedMetadata.image"
           class="rounded-2xl max-w-[200px]"
+          loading="lazy"
           @load="onImageLoad"
           v-show="isImageLoaded"
         />
