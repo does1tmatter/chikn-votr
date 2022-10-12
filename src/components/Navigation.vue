@@ -12,9 +12,9 @@ const { balanceOf } = useEggContract()
   <div class="sticky top-0 z-10 h-16 px-6 ">
     <div class="flex items-center h-full">
       <div class="items-start flex-1">
-        <RouterLink to="https://www.chiknisbeautiful.com/" class="inline-flex text-white transition hover:text-white/70 active:text-white font-shadows text-2xl">
-          'CBP' {{ chainName }} 
-        </RouterLink>
+        <Link to="https://www.chiknisbeautiful.com/" class="inline-flex text-white transition hover:text-white/70 active:text-white font-shadows text-2xl">
+          CBP {{ chainName }} 
+        </Link>
       </div>
       <div class="flex items-center justify-end flex-1 gap-4">
         <div v-if="isAuthenticated">
