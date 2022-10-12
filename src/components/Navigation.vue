@@ -18,7 +18,7 @@ const { isAuthenticated, isAppNetwork, isAuthenticating, login, logout, wallet, 
       </div>
       <div class="items-start flex-1">
         <RouterLink to="/" class="inline-flex text-white transition hover:text-white/70 active:text-white font-shadows text-2xl">
-          CBP
+          Chikn is Beautiful
         </RouterLink>
       </div>
       <div class="flex items-center justify-end flex-1 gap-4">
