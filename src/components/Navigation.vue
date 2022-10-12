@@ -13,6 +13,11 @@ const { isAuthenticated, isAppNetwork, isAuthenticating, login, logout, wallet, 
           CBP
         </RouterLink>
       </div>
+      <div class="items-start flex-1">
+        <RouterLink to="/" class="inline-flex text-white transition hover:text-white/70 active:text-white font-shadows text-2xl">
+          CBP
+        </RouterLink>
+      </div>
       <div class="flex items-center justify-end flex-1 gap-4">
         <div v-if="isAuthenticated">
           <div class="text-sm font-semibold text-white text-right">
