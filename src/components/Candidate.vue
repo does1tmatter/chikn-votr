@@ -84,9 +84,6 @@ onAppEvent(({ type, payload }) => {
         <div class="mt-1 text-sm">
           Total Votes: <span class="text-gold-500">{{ votes }}</span>
         </div>
-        <div class="mt-1 text-sm">
-          Your Votes: <span class="text-gold-500">{{ votes }}</span>
-        </div>
         <div class="text-xs mt-2">
           Candidate ID: <span class="text-gold-500">{{ candidate.id }}</span>
         </div>
