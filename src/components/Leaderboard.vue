@@ -14,10 +14,10 @@ const { scores } = toRefs(props)
             Rank
           </div>
           <div class="flex-1">
-            Name
+            Chikn ID#
           </div>
           <div class="flex-1">
-            Chikn ID#
+            Name
           </div>
           <div class="flex-1">
             Votes
@@ -32,10 +32,10 @@ const { scores } = toRefs(props)
             {{score.token}}
           </div>
           <div class="flex-1">
-            {{score.votes}}
+            {{score.chiknName}}
           </div>
           <div class="flex-1">
-            {{score.chiknName}}
+            {{score.votes}}
           </div>
         </div>
       </div>
