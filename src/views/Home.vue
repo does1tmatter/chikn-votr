@@ -118,59 +118,66 @@ onAppEvent(({ type }) => {
 </script>
 
 <template>
-  <div class="self-center w-full py-12 px-2">
-    <div class="text-center mb-8">
-      <div class="font-shadows text-5xl text-blue-300">
-        Chikn Beauty Pageant
+  <div class="self-center w-full py-12 px-2 max-w-[1400px] mx-auto px-4">
+    <div class="flex flex-wrap justify-between items-center">
+      <div class="text-center mx-auto md:mx-0">
+        <div class="font-shadows text-5xl text-blue-300">
+          Chikn Beauty Pageant
+        </div>
+        <div class="font-shadows text-2xl text-blue-300">
+          Community $EGG Burn Vote
+        </div>
+        <div class="mt-2 mb-8 text-xs text-blue-200">
+          Voting Ends on October 18th at 1:30am UTC
+        </div>
       </div>
-      <div class="font-shadows text-2xl text-blue-300">
-        Community $EGG Burn Vote
-      </div>
-      <div class="mt-2 mb-8 text-xs text-blue-200">
-        Voting Ends on October 18th at 1:30am UTC
-      </div>
-      <div class="text-3xl text-blue-300 font-shadows">
-        One $EGG = One Vote
-      </div>
-      <div class="mt-2 text-xs text-blue-200">
-        Top 10 Chikns with the most votes advance to the final round
+      
+      <template v-if="isAuthenticated">
+        <div class="max-w-[300px] text-center grid gap-4 mx-auto md:mx-0">
+          <Button
+            :loading="approvalPending"
+            :disabled="approvalPending || !isAuthenticated || isAuthenticating"
+            @click="allowanceState.allowance === 0 ? setApprove(1000) : setApprove(0)"
+          >
+            {{ allowanceState.allowance === 0 ? 'Approve' : 'Revoke' }} ${{ allowanceState.symbol }} spending
+          </Button>
+          <Button
+            :disabled="!allowanceState.allowance"
+            @click="vote1Egg()"
+          >
+            Vote 1 $EGG for every candidate
+          </Button>
+          <Button @click="toggleLeaderboard()">
+            Open leaderboard
+          </Button>
+        </div>
+      </template>
+      <template v-else>
+        <div class="max-w-[300px] grid gap-4 text-center mx-auto md:mx-0">
+          <Button
+            :loading="isAuthenticating"
+            :disabled="isAuthenticating"
+            @click="login()"
+          >
+            Connect to vote
+          </Button>
+          <Button @click="toggleLeaderboard()">
+            Open leaderboard
+          </Button>
+        </div>
+      </template>
+    </div>
+    <div class="mt-4 text-xs text-center">
+      <div class="flex flex-wrap rounded-lg gap-2 md:gap-6">
+        <div class="text-blue-200">
+          One $EGG = One Vote
+        </div>
+        <div class="text-blue-200">
+          Top 10 Chikns with the most votes advance to the final round
+        </div>
       </div>
     </div>
-    <template v-if="isAuthenticated">
-      <div class="max-w-[300px] mx-auto text-center grid gap-4">
-        <Button
-          :loading="approvalPending"
-          :disabled="approvalPending || !isAuthenticated || isAuthenticating"
-          @click="allowanceState.allowance === 0 ? setApprove(1000) : setApprove(0)"
-        >
-          {{ allowanceState.allowance === 0 ? 'Approve' : 'Revoke' }} ${{ allowanceState.symbol }} spending
-        </Button>
-        <Button
-          :disabled="!allowanceState.allowance"
-          @click="vote1Egg()"
-        >
-          Vote 1 $EGG for every candidate
-        </Button>
-        <Button @click="toggleLeaderboard()">
-          Open leaderboard
-        </Button>
-      </div>
-    </template>
-    <template v-else>
-      <div class="max-w-[300px] mx-auto grid gap-4 text-center">
-        <Button
-          :loading="isAuthenticating"
-          :disabled="isAuthenticating"
-          @click="login()"
-        >
-          Connect to vote
-        </Button>
-        <Button @click="toggleLeaderboard()">
-          Open leaderboard
-        </Button>
-      </div>
-    </template>
-    <div class="max-w-[1400px] mx-auto mt-16 grid md:grid-cols-2 xl:grid-cols-3 gap-2">
+    <div class="mt-2 grid md:grid-cols-2 xl:grid-cols-3 gap-2">
       <Candidate 
         v-for="candidate in candidateIds"
         :key="candidate.id"
