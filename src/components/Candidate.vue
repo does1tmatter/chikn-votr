@@ -14,7 +14,6 @@ const isImageLoaded = ref(false)
 const emit = defineEmits(['load'])
 
 const { state: votes, isLoading, execute } = useAsyncState(() => returnTotalVotesForCandidateIDNumber(candidate.value.id), 0, { immediate: false })
-const { state: votes, isLoading, execute } = useAsyncState(() => addressTotalVotesForIDNumber(candidate.value.id), 0, { immediate: false })
 
 execute().then(() => {
   emit('load', { token: candidate.value.token, votes: votes.value })
