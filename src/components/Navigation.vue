@@ -1,9 +1,7 @@
 <script setup>
 import useUser from '@/composables/useUser'
 import { sliceAddress } from '@/utils'
-import { useVotingContract, useUser } from '@/composables'
-import { useEggContract, useUser } from '@/composables'
-
+import { useVotingContract, useEggContract, useUser } from '@/composables'
 
 const { isAuthenticated, isAppNetwork, isAuthenticating, login, logout, wallet, address, ens, chainName } = useUser()
 </script>
