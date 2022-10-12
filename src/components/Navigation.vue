@@ -11,7 +11,7 @@ const { isAuthenticated, isAppNetwork, isAuthenticating, login, logout, wallet, 
     <div class="flex items-center h-full">
       <div class="items-start flex-1">
         <RouterLink to="/" class="inline-flex text-white transition hover:text-white/70 active:text-white font-shadows text-2xl">
-          CBP
+          Your Total Votes' totalVotesFromVoterAddress
         </RouterLink>
       </div>
       <div class="items-start flex-1">
@@ -23,15 +23,6 @@ const { isAuthenticated, isAppNetwork, isAuthenticating, login, logout, wallet, 
         <div v-if="isAuthenticated">
           <div class="text-sm font-semibold text-white text-right">
             {{ ens ?? sliceAddress(address) }}
-          </div>
-          <div class="flex items-center justify-end gap-2 text-xs text-white text-right whitespace-nowrap">
-            {{ chainName }}
-          </div>
-          <div class="text-sm font-semibold text-white text-right">
-            {{ 'Your Total Votes' totalVotesFromVoterAddress }}
-          </div>
-          <div class="flex items-center justify-end gap-2 text-xs text-white text-right whitespace-nowrap">
-            {{ chainName }}
           </div>
         </div>
         <Button
