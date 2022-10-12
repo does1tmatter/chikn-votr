@@ -1,6 +1,9 @@
 <script setup>
 import useUser from '@/composables/useUser'
 import { sliceAddress } from '@/utils'
+import { useVotingContract, useUser } from '@/composables'
+import { useEggContract, useUser } from '@/composables'
+
 
 const { isAuthenticated, isAppNetwork, isAuthenticating, login, logout, wallet, address, ens, chainName } = useUser()
 </script>
@@ -26,13 +29,19 @@ const { isAuthenticated, isAppNetwork, isAuthenticating, login, logout, wallet, 
           <div class="flex items-center justify-end gap-2 text-xs text-white text-right whitespace-nowrap">
             {{ chainName }}
           </div>
+          <div class="text-sm font-semibold text-white text-right">
+            {{ 'Your Total Votes' totalVotesFromVoterAddress }}
+          </div>
+          <div class="flex items-center justify-end gap-2 text-xs text-white text-right whitespace-nowrap">
+            {{ chainName }}
+          </div>
         </div>
         <Button
           @click="isAuthenticated ? logout() : login()" 
           :disabled="isAuthenticating || !wallet || !isAppNetwork"
           :loading="isAuthenticating"
         >
-          {{ wallet ? isAppNetwork ? isAuthenticated ? 'Logout' : 'Connect Wallet' : 'Wrong Network' : 'Unable to detect Ethereum provider' }}
+          {{ wallet ? isAppNetwork ? isAuthenticated ? 'Logout' : 'Connect Wallet' : 'Wrong Network' : 'Unable to detect Avalanche provider' }}
         </Button>
       </div>
     </div>
