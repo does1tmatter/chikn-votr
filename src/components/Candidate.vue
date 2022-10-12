@@ -6,7 +6,7 @@ import { notify } from 'notiwind'
 
 const { address } = useUser()
 const { on: onAppEvent, emit: emitAppEvent } = useEventBus('app')
-const { returnTotalVotesForCandidateIDNumber, voteWithEggByCandidateNumber } = useVotingContract(address)
+const { addressTotalVotesForIDNumber, returnTotalVotesForCandidateIDNumber, voteWithEggByCandidateNumber } = useVotingContract(address)
 
 const props = defineProps(['candidate', 'allowance', 'index'])
 const { candidate, allowance, index } = toRefs(props)
@@ -82,7 +82,10 @@ onAppEvent(({ type, payload }) => {
       <div>
         <span class="text-gold-500 font-shadows">{{ parsedData.name }}</span>
         <div class="mt-1 text-sm">
-          Votes: <span class="text-gold-500">{{ votes }}</span>
+          Total Votes: <span class="text-gold-500">{{ votes }}</span>
+        </div>
+        <div class="mt-1 text-sm">
+          My Votes: <span class="text-gold-500">{{ Myvotes }}</span>
         </div>
         <div class="text-xs mt-2">
           Candidate ID: <span class="text-gold-500">{{ candidate.id }}</span>

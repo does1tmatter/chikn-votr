@@ -149,7 +149,7 @@ onAppEvent(({ type }) => {
           :disabled="!allowanceState.allowance"
           @click="vote1Egg()"
         >
-          Vote 1 $EGG for each candidate
+          Vote 1 $EGG for every candidate
         </Button>
         <Button @click="toggleLeaderboard()">
           Open leaderboard

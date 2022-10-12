@@ -1,5 +1,5 @@
 {
-  "name": "chickn-dapp",
+  "name": "cbp-dapp",
   "version": "0.0.0",
   "scripts": {
     "dev": "vite --host",
