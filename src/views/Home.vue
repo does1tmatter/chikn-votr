@@ -3,9 +3,9 @@ import { ref, computed } from 'vue'
 import { useAsyncState, useEventBus, useToggle } from '@vueuse/core'
 import { useEggContract, useUser, useVotingContract } from '@/composables'
 import { notify } from 'notiwind'
-import { candidateIds } from '@/utils'
+import { candidateIds, randomize } from '@/utils'
 
-const candidates = ref([...candidateIds])
+const candidates = ref(randomize(candidateIds))
 
 const { on: onAppEvent, emit: emitAppEvent } = useEventBus('app')
 const { address, isAuthenticated, isAuthenticating, login } = useUser()

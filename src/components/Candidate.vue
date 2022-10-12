@@ -67,7 +67,7 @@ onAppEvent(({ type, payload }) => {
 <template>
   <div class="relative p-4 bg-gradient-to-tr from-red-200/10 rounded-3xl leading-none flex items-center gap-2">
     <LoadingOverlay v-if="!isImageLoaded || isLoading" />
-    <a :href="parsedMetadata.image" target="_blank">
+    <a :href="parsedMetadata.image" target="_blank" class="min-w-[200px]">
       <Transition name="fade">
         <img
           :src="parsedMetadata.image"
@@ -84,9 +84,9 @@ onAppEvent(({ type, payload }) => {
         <div class="mt-1 text-sm">
           Total Votes: <span class="text-gold-500">{{ votes }}</span>
         </div>
-        <div class="mt-1 text-sm">
+        <!-- <div class="mt-1 text-sm">
           My Votes: <span class="text-gold-500">{{ Myvotes }}</span>
-        </div>
+        </div> -->
         <div class="text-xs mt-2">
           Candidate ID: <span class="text-gold-500">{{ candidate.id }}</span>
         </div>
@@ -104,7 +104,7 @@ onAppEvent(({ type, payload }) => {
             ${{ allowance.symbol }} amount
           </div>
           <div class="text-gold-500 max-w-[100px]">
-            <input type="number" class="input input--default" v-model="eggCount" />
+            <input type="number" min="0" class="input input--default text-center" v-model="eggCount" />
           </div>
         </div>
         <div class="text-right self-end">
