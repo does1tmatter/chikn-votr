@@ -1,7 +1,7 @@
 export default [
   { id: 1, token: 5848, votes: 0, chiknName: 'Natalie Portman' },
   { id: 2, token: 6862, votes: 0, chiknName: 'Au Bok'  },
-  { id: 3, token: 7803, votes: 0, chiknName: 'Boner Garage'  },
+  { id: 3, token: 7803, votes: 0, chiknName: 'Rita Layworth'  },
   { id: 4, token: 786, votes: 0, chiknName: 'Boksanne'  },
   { id: 5, token: 5066, votes: 0, chiknName: 'Business Bitch'  },
   { id: 6, token: 348, votes: 0, chiknName: 'Pineapple Express'  },
