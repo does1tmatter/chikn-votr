@@ -4,6 +4,7 @@ import { storeToRefs } from 'pinia'
 import useUserStore from '@/stores/user'
 import { notify } from 'notiwind'
 import { sliceAddress } from '@/utils'
+import { useEventBus } from '@vueuse/core'
 
 export default () => {
   const wallet = inject('wallet')
@@ -13,12 +14,15 @@ export default () => {
   const { setUser, resetUser } = userStore
   const isAuthenticating = ref(false)
 
+  const { emit: emitAppEvent } = useEventBus('app')
+
   const login = async (route = { name: 'Home' }) => {
     try {
       isAuthenticating.value = true
       const [a] = await wallet.provider.request({ method: 'eth_requestAccounts' })
       const e = chainEnsSupport.value ? await wallet.lookupAddress(a) : null
       setUser(a, e)
+      emitAppEvent({ type: 'accountsChanged' })
       notify({
         type: 'success',
         title: 'Authorization',
@@ -39,6 +43,7 @@ export default () => {
 
   const logout = async () => {
     resetUser()
+    emitAppEvent({ type: 'accountsChanged' })
     router.replace({ name: 'Home' })
     notify({
       type: 'success',
