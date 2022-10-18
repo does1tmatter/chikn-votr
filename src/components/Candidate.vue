@@ -107,7 +107,7 @@ onAppEvent(({ type, payload }) => {
 
       <div class="flex-1 grid gap-2 w-full">
         <div>
-          <span class="text-gold-500 font-shadows">{{ state.backend.name }}</span>
+          <span class="text-gold-500 font-celaraz font-black">{{ state.backend.name }}</span>
           <div class="mt-1 text-xs">
             Total votes: <span class="text-gold-500">{{ state.votes }}</span>
           </div>

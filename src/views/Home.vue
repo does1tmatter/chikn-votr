@@ -151,11 +151,11 @@ onAppEvent(({ type }) => {
 <template>
   <div class="self-center w-full py-12 px-2 max-w-[1400px] mx-auto px-4">
     <div class="flex flex-wrap justify-between items-center">
-      <div class="text-center mx-auto md:mx-0">
-        <div class="font-shadows text-5xl text-blue-300">
+      <div class="text-center mx-auto md:mx-0 font-celaraz">
+        <div class="font-black text-5xl text-blue-300">
           Chikn Beauty Pageant
         </div>
-        <div class="font-shadows text-2xl text-blue-300">
+        <div class="text-2xl text-blue-300">
           Community $EGG Burn Vote
         </div>
         <div class="mt-2 mb-8 text-xs text-blue-200">
@@ -200,27 +200,27 @@ onAppEvent(({ type }) => {
     </div>
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 mt-4">
       <div class="px-6 py-4 shadow-sm bg-gradient-to-tr from-red-200/10 rounded-2xl flex justify-between items-center">
-        <div class="text-xs italic">You voted</div>
+        <div class="text-xs font-celaraz">You voted</div>
         <div class="font-bold">{{ state.addressVotes }}</div>
       </div>
       <div class="px-6 py-4 shadow-sm bg-gradient-to-tr from-red-200/10 rounded-2xl flex justify-between items-center">
-        <div class="text-xs italic">All votes cast</div>
+        <div class="text-xs font-celaraz">All votes cast</div>
         <div class="font-bold">{{ state.votes }}</div>
       </div>
       <div class="px-6 py-4 shadow-sm bg-gradient-to-tr from-red-200/10 rounded-2xl flex justify-between items-center">
-        <div class="text-xs italic">Hours left</div>
+        <div class="text-xs font-celaraz">Hours left</div>
         <div class="font-bold">{{ state.timestamp }}</div>
       </div>
       <div class="px-6 py-4 shadow-sm bg-gradient-to-tr from-red-200/10 rounded-2xl flex justify-between items-center">
-        <div class="text-xs italic">$EGG balance</div>
+        <div class="text-xs font-celaraz">$EGG balance</div>
         <div class="font-bold">{{ state.balance }} $EGG</div>
       </div>
       <div class="px-6 py-4 shadow-sm bg-gradient-to-tr from-red-200/10 rounded-2xl flex justify-between items-center">
-        <div class="text-xs italic">Prize wallet</div>
+        <div class="text-xs font-celaraz">Prize wallet</div>
         <div class="font-bold">{{ Number(state.prize).toFixed(0) }} $EGG</div>
       </div>
       <div class="px-6 py-4 shadow-sm bg-gradient-to-tr from-red-200/10 rounded-2xl flex justify-between items-center">
-        <div class="text-xs italic">Total $EGG burnt</div>
+        <div class="text-xs font-celaraz">Total $EGG burnt</div>
         <div class="font-bold">{{ Number(state.burned).toFixed(0) }} $EGG</div>
       </div>
     </div>

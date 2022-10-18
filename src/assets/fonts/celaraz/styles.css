@@ -1,0 +1,96 @@
+@font-face {
+    font-family: 'Celaraz';
+    src: url('Celaraz-Bold.eot');
+    src: local('Celaraz Bold'), local('Celaraz-Bold'),
+        url('Celaraz-Bold.eot?#iefix') format('embedded-opentype'),
+        url('Celaraz-Bold.woff2') format('woff2'),
+        url('Celaraz-Bold.woff') format('woff'),
+        url('Celaraz-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Celaraz';
+    src: url('Celaraz-ExtraBoldItalic.eot');
+    src: local('Celaraz ExtraBold Italic'), local('Celaraz-ExtraBoldItalic'),
+        url('Celaraz-ExtraBoldItalic.eot?#iefix') format('embedded-opentype'),
+        url('Celaraz-ExtraBoldItalic.woff2') format('woff2'),
+        url('Celaraz-ExtraBoldItalic.woff') format('woff'),
+        url('Celaraz-ExtraBoldItalic.ttf') format('truetype');
+    font-weight: 800;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Celaraz';
+    src: url('Celaraz-Italic.eot');
+    src: local('Celaraz Italic'), local('Celaraz-Italic'),
+        url('Celaraz-Italic.eot?#iefix') format('embedded-opentype'),
+        url('Celaraz-Italic.woff2') format('woff2'),
+        url('Celaraz-Italic.woff') format('woff'),
+        url('Celaraz-Italic.ttf') format('truetype');
+    font-weight: normal;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Celaraz';
+    src: url('Celaraz-Regular.eot');
+    src: local('Celaraz Regular'), local('Celaraz-Regular'),
+        url('Celaraz-Regular.eot?#iefix') format('embedded-opentype'),
+        url('Celaraz-Regular.woff2') format('woff2'),
+        url('Celaraz-Regular.woff') format('woff'),
+        url('Celaraz-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Celaraz';
+    src: url('Celaraz-Light.eot');
+    src: local('Celaraz Light'), local('Celaraz-Light'),
+        url('Celaraz-Light.eot?#iefix') format('embedded-opentype'),
+        url('Celaraz-Light.woff2') format('woff2'),
+        url('Celaraz-Light.woff') format('woff'),
+        url('Celaraz-Light.ttf') format('truetype');
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Celaraz';
+    src: url('Celaraz-ExtraBold.eot');
+    src: local('Celaraz ExtraBold'), local('Celaraz-ExtraBold'),
+        url('Celaraz-ExtraBold.eot?#iefix') format('embedded-opentype'),
+        url('Celaraz-ExtraBold.woff2') format('woff2'),
+        url('Celaraz-ExtraBold.woff') format('woff'),
+        url('Celaraz-ExtraBold.ttf') format('truetype');
+    font-weight: 800;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Celaraz';
+    src: url('Celaraz-LightItalic.eot');
+    src: local('Celaraz Light Italic'), local('Celaraz-LightItalic'),
+        url('Celaraz-LightItalic.eot?#iefix') format('embedded-opentype'),
+        url('Celaraz-LightItalic.woff2') format('woff2'),
+        url('Celaraz-LightItalic.woff') format('woff'),
+        url('Celaraz-LightItalic.ttf') format('truetype');
+    font-weight: 300;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Celaraz';
+    src: url('Celaraz-BoldItalic.eot');
+    src: local('Celaraz Bold Italic'), local('Celaraz-BoldItalic'),
+        url('Celaraz-BoldItalic.eot?#iefix') format('embedded-opentype'),
+        url('Celaraz-BoldItalic.woff2') format('woff2'),
+        url('Celaraz-BoldItalic.woff') format('woff'),
+        url('Celaraz-BoldItalic.ttf') format('truetype');
+    font-weight: bold;
+    font-style: italic;
+}
+
