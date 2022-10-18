@@ -90,61 +90,61 @@ onAppEvent(({ type, payload }) => {
 </script>
 
 <template>
-  <div class="relative p-4 bg-gradient-to-tr from-red-200/10 rounded-3xl leading-none min-h-[200px]">
+  <div class="relative p-4 bg-gradient-to-tr from-red-200/10 rounded-3xl leading-none min-h-[200px] grid items-center">
     <LoadingOverlay v-if="isLoading" />
 
     <div v-else class="flex items-center gap-2">
-      <a :href="state.metadata.image" target="_blank" class="min-w-[200px]">
-      <Transition name="fade">
-        <img
-          :src="state.metadata.image"
-          class="rounded-2xl max-w-[200px]"
-          @load="onImageLoad"
-          v-show="isImageLoaded"
-        />
-      </Transition>
-    </a>
+      <a :href="state.metadata.image" target="_blank" class="sm:min-w-[200px] flex-1">
+        <Transition name="fade">
+          <img
+            :src="state.metadata.image"
+            class="rounded-2xl sm:max-w-[200px] mx-auto"
+            @load="onImageLoad"
+            v-show="isImageLoaded"
+          />
+        </Transition>
+      </a>
 
-    <div class="flex-1 grid gap-2">
-      <div>
-        <span class="text-gold-500 font-shadows">{{ state.backend.name }}</span>
-        <div class="mt-1 text-xs">
-          Total votes: <span class="text-gold-500">{{ state.votes }}</span>
-        </div>
-        <div v-if="isAuthenticated" class="text-xs">
-          My votes: <span class="text-gold-500">{{ state.userState }}</span>
-        </div>
-        <div class="text-xs mt-2">
-          Candidate ID: <span class="text-gold-500">{{ candidate.id }}</span>
-        </div>
-        <div class="text-xs">
-          Token ID: <span class="text-gold-500">{{ candidate.token }}</span>
-        </div>
-      </div>
-      <div class="text-xs text-justify text-red-100/80 min-h-[30px] italic">
-        {{ state.backend.lore ?? 'No bio present' }}
-      </div>
-
-      <div class="flex items-center justify-between gap-1">
-        <div class="self-end">
+      <div class="flex-1 grid gap-2 w-full">
+        <div>
+          <span class="text-gold-500 font-shadows">{{ state.backend.name }}</span>
+          <div class="mt-1 text-xs">
+            Total votes: <span class="text-gold-500">{{ state.votes }}</span>
+          </div>
+          <div v-if="isAuthenticated" class="text-xs">
+            My votes: <span class="text-gold-500">{{ state.userState }}</span>
+          </div>
+          <div class="text-xs mt-2">
+            Candidate ID: <span class="text-gold-500">{{ candidate.id }}</span>
+          </div>
           <div class="text-xs">
-            ${{ allowance.symbol }} amount
-          </div>
-          <div class="text-gold-500 max-w-[100px]">
-            <input type="number" min="0" class="input input--default text-center" v-model="eggCount" />
+            Token ID: <span class="text-gold-500">{{ candidate.token }}</span>
           </div>
         </div>
-        <div class="text-right self-end">
-          <Button
-            :disabled="!eggCount || !allowance.allowance || votePending"
-            :loading="votePending"
-            @click="vote(candidate.id, eggCount)"
-          >
-            Vote
-          </Button>
+        <div class="text-xs text-justify text-red-100/80 min-h-[30px] italic">
+          {{ state.backend.lore ?? 'No bio present' }}
+        </div>
+
+        <div class="flex items-center justify-between gap-1">
+          <div class="self-end">
+            <div class="text-xs">
+              ${{ allowance.symbol }} amount
+            </div>
+            <div class="text-gold-500 max-w-[100px]">
+              <input type="number" min="0" class="input input--default text-center" v-model="eggCount" />
+            </div>
+          </div>
+          <div class="text-right self-end">
+            <Button
+              :disabled="!eggCount || !allowance.allowance || votePending"
+              :loading="votePending"
+              @click="vote(candidate.id, eggCount)"
+            >
+              Vote
+            </Button>
+          </div>
         </div>
       </div>
-    </div>
     </div>
 
   </div>

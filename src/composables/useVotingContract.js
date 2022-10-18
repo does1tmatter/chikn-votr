@@ -17,7 +17,7 @@ export default (address) => {
   const prizeMoneyTotalWei = async () => await contract.prizeMoneyTotalWei().then(response => String(ethers.utils.formatEther(response)))
   const eggBurntTotalWei = async () => await contract.eggBurntTotalWei().then(response => String(ethers.utils.formatEther(response)))
   const allVotesTotalBase = async () => await contract.allVotesTotalBase().then(response => String(response))
-  const votingTimeLeftBlockTimestampHours = async () => await contract.votingTimeLeftBlockTimestamp().then(response => String(Math.floor(Number(response) / 3600)))
+  const votingTimeLeftBlockTimestampHours = async () => await contract.votingTimeLeftBlockTimestamp().then(response => String(Math.floor(Number(response) / 3600))).catch(() => 0)
   const totalVotesFromVoterAddress = async (payload) => await contract.totalVotesFromVoterAddress(payload ?? address.value).then(response => String(response))
   const addressTotalVotesForIDNumber = async (id, payload) => await contract.addressTotalVotesForIdNumber(payload ?? address.value, id).then(response => String(response))
 

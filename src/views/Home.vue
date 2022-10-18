@@ -9,12 +9,12 @@ const candidates = ref(randomize(candidateIds))
 
 const { on: onAppEvent, emit: emitAppEvent } = useEventBus('app')
 const { address, isAuthenticated, isAuthenticating, login } = useUser()
-const { symbol, allowance, approve } = useEggContract(address)
-const { voteOneEggForEachCandidate } = useVotingContract(address)
+const { symbol, allowance, approve, balanceOf } = useEggContract(address)
+const { voteOneEggForEachCandidate, prizeMoneyTotalWei, eggBurntTotalWei, allVotesTotalBase, totalVotesFromVoterAddress, votingTimeLeftBlockTimestampHours } = useVotingContract(address)
 
 const loadAllowanceState = async () => {
   try {
-    const [ _symbol, _allowance] = await Promise.all([symbol(), loadUserState()])
+    const [ _symbol, _allowance] = await Promise.all([symbol(), loadUserAllowance()])
 
     return Promise.resolve({
       symbol: _symbol,
@@ -29,17 +29,46 @@ const loadAllowanceState = async () => {
   }
 }
 
-const loadUserState = async () => {
+const loadUserAllowance = async () => {
   if (!isAuthenticated.value) return 0
 
   const _allowance = await allowance()
   return Promise.resolve(_allowance)
 }
 
-const { state: allowanceState, execute: loadState } = useAsyncState(() => loadAllowanceState(), {}, { resetOnExecute: false })
+const { state: allowanceState, execute: loadAllowance } = useAsyncState(() => loadAllowanceState(), {}, { resetOnExecute: false })
+
+const loadContractState = async () => {
+  try {
+    const [burned, votes, prize, timestamp, user] = await Promise.all([eggBurntTotalWei(), allVotesTotalBase(), prizeMoneyTotalWei(), votingTimeLeftBlockTimestampHours(), loadUserState()])
+
+    return Promise.resolve({
+      burned,
+      votes,
+      prize,
+      timestamp,
+      ...user
+    })
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+const loadUserState = async () => {
+  if (!isAuthenticated.value) return Promise.resolve({ balance: 0, addressVotes: 0 })
+  try {
+    const [balance, addressVotes] = await Promise.all([balanceOf(), totalVotesFromVoterAddress()])
+
+    return Promise.resolve({ balance, addressVotes })
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+const { state, execute: loadStats } = useAsyncState(() => loadContractState(), {}, { resetOnExecute: false })
+
 
 const approvalPending = ref(false)
-
 const setApprove = async (_count) => {
   approvalPending.value = true
   try {
@@ -106,10 +135,12 @@ const [leaderboard, toggleLeaderboard] = useToggle(false)
 onAppEvent(({ type }) => {
   const events = {
     'accountsChanged': () => {
-      loadState()
+      loadAllowance()
+      loadStats()
     },
     'tokensChanged': () => {
-      loadState()
+      loadAllowance()
+      loadStats()
     }
   }
   
@@ -167,14 +198,38 @@ onAppEvent(({ type }) => {
         </div>
       </template>
     </div>
-    <div class="mt-4 text-xs text-center">
-      <div class="flex flex-wrap rounded-lg gap-2 md:gap-6">
-        <div class="text-blue-200">
-          One $EGG = One Vote
-        </div>
-        <div class="text-blue-200">
-          Top 10 Chikns with the most votes advance to the final round
-        </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 mt-4">
+      <div class="px-6 py-4 shadow-sm bg-gradient-to-tr from-red-200/10 rounded-2xl flex justify-between items-center">
+        <div class="text-xs italic">You voted</div>
+        <div class="font-bold">{{ state.addressVotes }}</div>
+      </div>
+      <div class="px-6 py-4 shadow-sm bg-gradient-to-tr from-red-200/10 rounded-2xl flex justify-between items-center">
+        <div class="text-xs italic">All votes cast</div>
+        <div class="font-bold">{{ state.votes }}</div>
+      </div>
+      <div class="px-6 py-4 shadow-sm bg-gradient-to-tr from-red-200/10 rounded-2xl flex justify-between items-center">
+        <div class="text-xs italic">Hours left</div>
+        <div class="font-bold">{{ state.timestamp }}</div>
+      </div>
+      <div class="px-6 py-4 shadow-sm bg-gradient-to-tr from-red-200/10 rounded-2xl flex justify-between items-center">
+        <div class="text-xs italic">$EGG balance</div>
+        <div class="font-bold">{{ state.balance }} $EGG</div>
+      </div>
+      <div class="px-6 py-4 shadow-sm bg-gradient-to-tr from-red-200/10 rounded-2xl flex justify-between items-center">
+        <div class="text-xs italic">Prize wallet</div>
+        <div class="font-bold">{{ Number(state.prize).toFixed(0) }} $EGG</div>
+      </div>
+      <div class="px-6 py-4 shadow-sm bg-gradient-to-tr from-red-200/10 rounded-2xl flex justify-between items-center">
+        <div class="text-xs italic">Total $EGG burnt</div>
+        <div class="font-bold">{{ Number(state.burned).toFixed(0) }} $EGG</div>
+      </div>
+    </div>
+    <div class="mt-4 text-xs text-center flex flex-wrap gap-2 md:gap-6 italic">
+      <div class="text-blue-200">
+        One $EGG = One Vote
+      </div>
+      <div class="text-blue-200">
+        Top 10 Chikns with the most votes advance to the final round
       </div>
     </div>
     <div class="mt-2 grid md:grid-cols-2 xl:grid-cols-3 gap-2">
