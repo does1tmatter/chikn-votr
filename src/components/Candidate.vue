@@ -86,15 +86,15 @@ onAppEvent(({ type, payload }) => {
 </script>
 
 <template>
-  <div class="relative p-4 bg-gradient-to-tr from-red-200/10 rounded-3xl leading-none min-h-[200px] grid items-center">
+  <div class="relative p-2 bg-gradient-to-tr from-red-200/10 rounded-3xl leading-none min-h-[200px] grid items-center">
     <LoadingOverlay v-if="isLoading" />
 
     <div v-else class="flex items-center gap-2">
-      <a :href="candidate.image" target="_blank" class="sm:min-w-[200px] flex-1">
+      <a :href="`judges/${candidate.id}.jpg`" target="_blank" class="sm:min-w-[200px] flex-1">
         <Transition name="fade">
           <img
-            :src="candidate.image"
-            class="rounded-2xl sm:max-w-[200px] mx-auto"
+            :src="`judges/${candidate.id}.jpg`"
+            class="rounded-2xl mx-auto"
             @load="onImageLoad"
             v-show="isImageLoaded"
           />
@@ -114,7 +114,7 @@ onAppEvent(({ type, payload }) => {
             My votes: <span class="text-gold-500">{{ state.userState }}</span>
           </div>
         </div>
-        <div class="text-xs text-justify text-red-100/80 min-h-[30px] italic">
+        <div class="text-xs text-red-100/80 min-h-[30px] italic">
           {{ candidate.bio ?? 'No bio present' }}
         </div>
 

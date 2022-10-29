@@ -66,7 +66,7 @@ const loadUserState = async () => {
   }
 }
 
-const { state, execute: loadStats } = useAsyncState(() => loadContractState(), { 
+const { state, execute: loadStats, isLoading: isContractLoading } = useAsyncState(() => loadContractState(), { 
   burned: 0,
   votes: 0,
   prize: 0,
@@ -160,7 +160,7 @@ onAppEvent(({ type }) => {
 </script>
 
 <template>
-  <div class="self-center w-full py-12 px-2 max-w-[1400px] mx-auto px-4">
+  <div class="self-start w-full py-12 px-2 max-w-[1400px] mx-auto px-4 grid gap-8">
     <div class="flex flex-wrap justify-between items-center">
       <div class="text-center mx-auto md:mx-0 font-celaraz">
         <div class="font-black text-5xl text-blue-300">
@@ -174,7 +174,7 @@ onAppEvent(({ type }) => {
             Voting {{ isVotingEnded ? 'has ended' : `ends ${timeAgo}` }}
           </UseTimeAgo>
         </div>
-        <div class="mb-8 text-xs text-blue-200">
+        <div class="text-xs text-blue-200">
           One $EGG = One Vote
         </div>
       </div>
@@ -214,7 +214,8 @@ onAppEvent(({ type }) => {
         </div>
       </template>
     </div>
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 mt-4">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 relative">
+      <LoadingOverlay v-if="isContractLoading" />
       <div class="px-6 py-4 shadow-sm bg-gradient-to-tr from-red-200/10 rounded-2xl flex justify-between items-center">
         <div class="text-xs font-celaraz">You voted</div>
         <div class="font-bold">{{ state.addressVotes }}</div>
@@ -248,7 +249,7 @@ onAppEvent(({ type }) => {
         Top 10 Chikns with the most votes advance to the final round
       </div>
     </div> -->
-    <div class="mt-2 grid md:grid-cols-2 xl:grid-cols-3 gap-2">
+    <div class="grid md:grid-cols-2 xl:grid-cols-3 gap-2">
       <Candidate 
         v-for="candidate in candidateIds"
         :key="candidate.id"
