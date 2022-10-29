@@ -23,17 +23,13 @@ const loadUserState = async () => {
 
 const loadState = async () => {
   try {
-    const [userState, votes, backend, metadata] = await Promise.all([
+    const [userState, votes] = await Promise.all([
       loadUserState(),
       returnTotalVotesForCandidateIDNumber(candidate.value.id),
-      useFetch(`https://api.chikn.farm/api/chikn/details/${candidate.value.token}`).get().json(),
-      useFetch(`https://api.chikn.farm/api/chikn/metadata/${candidate.value.token}`).get().json()
     ])
 
     return Promise.resolve({
       votes,
-      backend: backend.data.value,
-      metadata: metadata.data.value,
       userState
     })
   } catch (error) {
@@ -44,7 +40,7 @@ const loadState = async () => {
 const { state, isLoading, execute } = useAsyncState(() => loadState(), 0, { immediate: false })
 
 execute().then(() => {
-  emit('load', { token: candidate.value.token, votes: state.value.votes, chiknName: state.value.backend.name })
+  emit('load', { chiknName: candidate.value.name, votes: state.value.votes, id: candidate.value.id })
 })
 
 const onImageLoad = () => isImageLoaded.value = true
@@ -94,10 +90,10 @@ onAppEvent(({ type, payload }) => {
     <LoadingOverlay v-if="isLoading" />
 
     <div v-else class="flex items-center gap-2">
-      <a :href="state.metadata.image" target="_blank" class="sm:min-w-[200px] flex-1">
+      <a :href="candidate.image" target="_blank" class="sm:min-w-[200px] flex-1">
         <Transition name="fade">
           <img
-            :src="state.metadata.image"
+            :src="candidate.image"
             class="rounded-2xl sm:max-w-[200px] mx-auto"
             @load="onImageLoad"
             v-show="isImageLoaded"
@@ -107,22 +103,19 @@ onAppEvent(({ type, payload }) => {
 
       <div class="flex-1 grid gap-2 w-full">
         <div>
-          <span class="text-gold-500 font-celaraz font-light">{{ state.backend.name }}</span>
+          <span class="text-gold-500 font-celaraz font-light">{{ candidate.name }}</span>
+          <div class="text-xs">
+            Candidate ID: <span class="text-gold-500">{{ candidate.id }}</span>
+          </div>
           <div class="mt-1 text-xs">
             Total votes: <span class="text-gold-500">{{ state.votes }}</span>
           </div>
           <div v-if="isAuthenticated" class="text-xs">
             My votes: <span class="text-gold-500">{{ state.userState }}</span>
           </div>
-          <div class="text-xs mt-2">
-            Candidate ID: <span class="text-gold-500">{{ candidate.id }}</span>
-          </div>
-          <div class="text-xs">
-            Token ID: <span class="text-gold-500">{{ candidate.token }}</span>
-          </div>
         </div>
         <div class="text-xs text-justify text-red-100/80 min-h-[30px] italic">
-          {{ state.backend.lore ?? 'No bio present' }}
+          {{ candidate.bio ?? 'No bio present' }}
         </div>
 
         <div class="flex items-center justify-between gap-1">

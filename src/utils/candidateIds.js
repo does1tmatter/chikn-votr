@@ -1,30 +1,38 @@
 export default [
-  { id: 1, token: 5848 },
-  { id: 2, token: 6862 },
-  { id: 3, token: 7803 },
-  { id: 4, token: 786 },
-  { id: 5, token: 5066 },
-  { id: 6, token: 348 },
-  { id: 7, token: 8558 },
-  { id: 8, token: 6539 },
-  { id: 9, token: 3546 },
-  { id: 10, token: 4683 },
-  { id: 11, token: 8526 },
-  { id: 12, token: 7094 },
-  { id: 13, token: 7619 },
-  { id: 14, token: 1651 },
-  { id: 15, token: 4994 },
-  { id: 16, token: 4172 },
-  { id: 17, token: 2315 },
-  { id: 18, token: 3122 },
-  { id: 19, token: 944 },
-  { id: 20, token: 9652 },
-  { id: 21, token: 6678 },
-  { id: 22, token: 3312 },
-  { id: 23, token: 8046 },
-  { id: 24, token: 3347 },
-  { id: 25, token: 1458 },
-  { id: 26, token: 3870 },
-  { id: 27, token: 9006 },
-  { id: 28, token: 8415 }
+  { 
+    id: 1,
+    name: 'Riley Freeman',
+    bio: 'He is an 8–year-old who emulates the gangster lifestyle. He and many others commonly refer to him as "Riley Escobar", "Young Reezy", and "The Fundraiser".',
+    image: 'https://loremflickr.com/200/200'
+  },
+  { 
+    id: 2,
+    name: 'Huey Freeman',
+    bio: 'Huey is a highly intelligent 10-year-old boy, who rarely smiles or laughs, and recognizes and detests the absurdities of the society in which he lives.',
+    image: 'https://loremflickr.com/200/200'
+  },
+  { 
+    id: 3,
+    name: 'Robert Freeman',
+    bio: 'The best way to describe Robert is that he is old yet unwise. He never accepts responsibility for his actions, nor does he learn any lessons.',
+    image: 'https://loremflickr.com/200/200'
+  },
+  { 
+    id: 4,
+    name: 'Uncle Ruckus',
+    bio: 'Repellent in appearance, behavior, and attitude. He has an intense hatred of anything pertaining to black people, and goes out of his way to free himself from this identity.',
+    image: 'https://loremflickr.com/200/200'
+  },
+  { 
+    id: 5,
+    name: 'Lamilton Taeshawn',
+    bio: 'Lamilton is a sociopath, who does whatever he wants (i.e stealing, driving his grandmothers car, smoking, etc), without any regard for the law',
+    image: 'https://loremflickr.com/200/200'
+  },
+  { 
+    id: 6,
+    name: 'Colonel H. Stinkmeaner',
+    bio: 'Stinkmeaner is described as one of the most evil human beings to ever walk the earth. He is sadistic, nihilistic and overall horrible to everyone he meets.',
+    image: 'https://loremflickr.com/200/200'
+  },
 ]

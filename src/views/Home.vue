@@ -121,7 +121,7 @@ const vote1Egg = async () => {
 }
 
 const onCandidateLoad = (candidate) => {
-  const index = candidates.value.findIndex(t => t.token === candidate.token)
+  const index = candidates.value.findIndex(t => t.id === candidate.id)
   candidates.value[index] = {
     ...candidates.value[index],
     ...candidate
@@ -158,8 +158,11 @@ onAppEvent(({ type }) => {
         <div class="text-2xl text-blue-300">
           Community $EGG Burn Vote
         </div>
-        <div class="mt-2 mb-8 text-xs text-blue-200">
+        <div class="mt-2 text-xs text-blue-200">
           Voting Ends on October 18th at 1:30am UTC
+        </div>
+        <div class="mb-8 text-xs text-blue-200">
+          One $EGG = One Vote
         </div>
       </div>
       
@@ -224,14 +227,14 @@ onAppEvent(({ type }) => {
         <div class="font-bold">{{ Number(state.burned).toFixed(0) }} $EGG</div>
       </div>
     </div>
-    <div class="mt-4 text-xs text-center flex flex-wrap gap-2 md:gap-6 italic">
+    <!-- <div class="mt-4 text-xs text-center flex flex-wrap gap-2 md:gap-6 italic">
       <div class="text-blue-200">
         One $EGG = One Vote
       </div>
       <div class="text-blue-200">
         Top 10 Chikns with the most votes advance to the final round
       </div>
-    </div>
+    </div> -->
     <div class="mt-2 grid md:grid-cols-2 xl:grid-cols-3 gap-2">
       <Candidate 
         v-for="candidate in candidateIds"
