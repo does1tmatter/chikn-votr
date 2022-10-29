@@ -164,7 +164,7 @@ onAppEvent(({ type }) => {
     <div class="flex flex-wrap justify-between items-center">
       <div class="text-center mx-auto md:mx-0 font-celaraz">
         <div class="font-black text-5xl text-blue-300">
-          Chikn Beauty Pageant
+          Judge Egg Throwing
         </div>
         <div class="text-2xl text-blue-300">
           Community $EGG Burn Vote
