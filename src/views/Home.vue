@@ -10,15 +10,14 @@ const candidates = ref(randomize(candidateIds))
 
 const { on: onAppEvent, emit: emitAppEvent } = useEventBus('app')
 const { address, isAuthenticated, isAuthenticating, login } = useUser()
-const { symbol, allowance, approve, balanceOf } = useEggContract(address)
+const { allowance, approve, balanceOf } = useEggContract(address)
 const { voteOneEggForEachCandidate, prizeMoneyTotalWei, eggBurntTotalWei, allVotesTotalBase, totalVotesFromVoterAddress, votingTimeLeftBlockTimestampHours, endTimestamp } = useVotingContract(address)
 
-const loadAllowanceState = async () => {
+const loadUserAllowance = async () => {
+  if (!isAuthenticated.value) return 0
   try {
-    const [ _symbol, _allowance] = await Promise.all([symbol(), loadUserAllowance()])
-
+    const _allowance = await allowance()
     return Promise.resolve({
-      symbol: _symbol,
       allowance: _allowance
     })
   } catch (error) {
@@ -30,14 +29,7 @@ const loadAllowanceState = async () => {
   }
 }
 
-const loadUserAllowance = async () => {
-  if (!isAuthenticated.value) return 0
-
-  const _allowance = await allowance()
-  return Promise.resolve(_allowance)
-}
-
-const { state: allowanceState, execute: loadAllowance } = useAsyncState(() => loadAllowanceState(), {}, { resetOnExecute: false })
+const { state: allowanceState, execute: loadAllowance } = useAsyncState(() => loadUserAllowance(), { allowance: 0 }, { resetOnExecute: false })
 
 const loadContractState = async () => {
   try {
@@ -87,7 +79,7 @@ const setApprove = async (_count) => {
     notify({
       type: 'success',
       title: 'Allowance',
-      text: `${_count === 0 ? 'Revoked' : 'Approved'} $${allowanceState.value.symbol} allowance`
+      text: `${_count === 0 ? 'Revoked' : 'Approved'} $EGG allowance`
     })
     emitAppEvent({ type: 'tokensChanged' })
 
@@ -186,7 +178,7 @@ onAppEvent(({ type }) => {
             :disabled="approvalPending || !isAuthenticated || isAuthenticating"
             @click="allowanceState.allowance === 0 ? setApprove(1000) : setApprove(0)"
           >
-            {{ allowanceState.allowance === 0 ? 'Approve' : 'Revoke' }} ${{ allowanceState.symbol }} spending
+            {{ allowanceState.allowance === 0 ? 'Approve' : 'Revoke' }} $EGG spending
           </Button>
           <Button
             :disabled="!allowanceState.allowance"

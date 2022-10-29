@@ -57,7 +57,7 @@ const vote = async (_id, _eggs) => {
     notify({
       type: 'success',
       title: 'Voting',
-      text: `Voted ${_eggs} $${allowance.value.symbol} for #${_id}`
+      text: `Voted ${_eggs} $EGG for #${_id}`
     })
     emitAppEvent({ type: 'tokensChanged' })
 
@@ -121,7 +121,7 @@ onAppEvent(({ type, payload }) => {
         <div class="flex items-center justify-between gap-1">
           <div class="self-end">
             <div class="text-xs">
-              ${{ allowance.symbol }} amount
+              $EGG amount
             </div>
             <div class="text-gold-500 max-w-[100px]">
               <input type="number" min="0" class="input input--default text-center" v-model="eggCount" />
