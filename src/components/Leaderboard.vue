@@ -1,11 +1,9 @@
 <script setup>
-import { onMounted, toRefs } from 'vue'
+import { toRefs } from 'vue'
 import IconX from '@/assets/icons/x.svg'
 
 const props = defineProps(['scores'])
 const { scores } = toRefs(props)
-
-onMounted(() => console.log(scores))
 </script>
 
 <template>

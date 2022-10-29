@@ -1,6 +1,7 @@
 <script setup>
 import { ref, computed } from 'vue'
-import { useAsyncState, useEventBus, useToggle } from '@vueuse/core'
+import { useAsyncState, useEventBus, useToggle, useTimestamp } from '@vueuse/core'
+import { UseTimeAgo } from '@vueuse/components'
 import { useEggContract, useUser, useVotingContract } from '@/composables'
 import { notify } from 'notiwind'
 import { candidateIds, randomize } from '@/utils'
@@ -10,7 +11,7 @@ const candidates = ref(randomize(candidateIds))
 const { on: onAppEvent, emit: emitAppEvent } = useEventBus('app')
 const { address, isAuthenticated, isAuthenticating, login } = useUser()
 const { symbol, allowance, approve, balanceOf } = useEggContract(address)
-const { voteOneEggForEachCandidate, prizeMoneyTotalWei, eggBurntTotalWei, allVotesTotalBase, totalVotesFromVoterAddress, votingTimeLeftBlockTimestampHours } = useVotingContract(address)
+const { voteOneEggForEachCandidate, prizeMoneyTotalWei, eggBurntTotalWei, allVotesTotalBase, totalVotesFromVoterAddress, votingTimeLeftBlockTimestampHours, endTimestamp } = useVotingContract(address)
 
 const loadAllowanceState = async () => {
   try {
@@ -40,13 +41,13 @@ const { state: allowanceState, execute: loadAllowance } = useAsyncState(() => lo
 
 const loadContractState = async () => {
   try {
-    const [burned, votes, prize, timestamp, user] = await Promise.all([eggBurntTotalWei(), allVotesTotalBase(), prizeMoneyTotalWei(), votingTimeLeftBlockTimestampHours(), loadUserState()])
-
+    const [burned, votes, prize, timestamp, votingEnd, user] = await Promise.all([eggBurntTotalWei(), allVotesTotalBase(), prizeMoneyTotalWei(), votingTimeLeftBlockTimestampHours(), endTimestamp(), loadUserState()])
     return Promise.resolve({
       burned,
       votes,
       prize,
       timestamp,
+      votingEnd,
       ...user
     })
   } catch (error) {
@@ -65,7 +66,15 @@ const loadUserState = async () => {
   }
 }
 
-const { state, execute: loadStats } = useAsyncState(() => loadContractState(), {}, { resetOnExecute: false })
+const { state, execute: loadStats } = useAsyncState(() => loadContractState(), { 
+  burned: 0,
+  votes: 0,
+  prize: 0,
+  timestamp: 0,
+  votingEnd: 0,
+  balance: 0, 
+  addressVotes: 0
+}, { resetOnExecute: false })
 
 
 const approvalPending = ref(false)
@@ -132,6 +141,8 @@ const candidatesSorted = computed(() => candidates.value.sort((a, b) => b.votes 
 
 const [leaderboard, toggleLeaderboard] = useToggle(false)
 
+const isVotingEnded = computed(() => useTimestamp().value > state.value.votingEnd)
+
 onAppEvent(({ type }) => {
   const events = {
     'accountsChanged': () => {
@@ -159,7 +170,9 @@ onAppEvent(({ type }) => {
           Community $EGG Burn Vote
         </div>
         <div class="mt-2 text-xs text-blue-200">
-          Voting Ends on October 18th at 1:30am UTC
+          <UseTimeAgo v-slot="{ timeAgo }" :time="new Date(state.votingEnd)">
+            Voting {{ isVotingEnded ? 'has ended' : `ends ${timeAgo}` }}
+          </UseTimeAgo>
         </div>
         <div class="mb-8 text-xs text-blue-200">
           One $EGG = One Vote
